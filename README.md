@@ -18,6 +18,10 @@ make hello-run-trace
 ```
 make qemu-run
 ```
+##### And in qemu console
+```
+$ /etc/helloworld
+```
 ### Notice
 ```
 Linux base: 3.7-rc3
