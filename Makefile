@@ -1,4 +1,4 @@
-DIR_UNICORE64	:= $(wildcard ~/UniCore64)
+DIR_UNICORE64	:= $(PWD)
 DIR_WORKING	:= $(DIR_UNICORE64)/working
 DIR_GNU_UC	:= /pub/toolchain/uc64/unicore64-linux/
 
