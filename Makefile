@@ -7,7 +7,7 @@ CROSS_LIB	:= $(CROSS_UNICORE64)/unicore64-linux/lib
 CROSS_COMPILE	:= $(CROSS_UNICORE64)/bin/unicore64-linux-
 OBJDUMP		:= $(CROSS_COMPILE)objdump
 
-BUSYBOX_TARBALL	:= /pub/backup/busybox-1.21.1.tar.bz2
+BUSYBOX_TARBALL	:= $(DIR_UNICORE64)/busybox-1.21.1.tar.bz2
 BUSYBOX_CONFIG	:= $(DIR_UNICORE64)/initramfs/initramfs_busybox_config
 BUSYBOX_BUILDLOG:= $(DIR_WORKING)/busybox-build.log
 
@@ -74,6 +74,7 @@ all:
 highfive:
 	@make clean
 	@make busybox
+	@make helloworld-make
 	@make linux-new
 	@make linux-make
 	@make qemu-new
@@ -148,6 +149,9 @@ qemu-make:
 		--enable-trace-backend=stderr			\
 		--target-list=$(QEMU_TARGETS)			\
 		--enable-debug			 		\
+		--disable-werror				\
+		--enable-curses					\
+		--extra-cflags="-D restrict=restricT" 		\
 		--disable-sdl			 		\
 		--interp-prefix=$(DIR_GNU_UC)			\
 		--prefix=$(DIR_WORKING)/qemu-unicore64		\
@@ -170,3 +174,11 @@ qemu-run:
 		-append "root=/dev/ram"				\
 		2> $(QEMU_TRACELOG)
 
+helloworld-make:
+	@echo "Making helloworld"
+	@$(CROSS_COMPILE)gcc $(DIR_UNICORE64)/tests/helloworld.c -o \
+		 $(DIR_WORKING)/helloworld --static
+	@echo "Done"
+
+hello-run-trace:
+	$(DIR_WORKING)/qemu-unicore64/bin/qemu-unicore64 -strace $(DIR_WORKING)/helloworld

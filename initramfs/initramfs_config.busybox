@@ -37,6 +37,7 @@ slink /dev/fb		/dev/fb0 777 0 0
 file /etc/fstab		../../etc/fstab		755 0 0
 file /etc/inittab	../../etc/inittab	755 0 0
 file /etc/passwd	../../etc/passwd	755 0 0
+file /etc/helloworld	../../working/helloworld	755 0 0
 #file /etc/sysinit	../../etc/sysinit	755 0 0
 
 file /bin/busybox	../busybox/_install/bin/busybox 755 0 0
