@@ -1,6 +1,16 @@
+# Unicore 64bit
+### Usage
+```
+make highfive
+make qemu-run
+```
+
+### Notice
+```
 Linux base: 3.7-rc3
 
 patches-3.7:
 	arch/unicore64 should be placed under linux/arch/unicore64 dir
 	Documentation/DocBook/unicore64-kernel.tmpl should be placed under linux/Documentation/DocBook dir
 	patches-fixup/* should be applied
+```
