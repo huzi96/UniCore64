@@ -31,3 +31,14 @@ patches-3.7:
 	Documentation/DocBook/unicore64-kernel.tmpl should be placed under linux/Documentation/DocBook dir
 	patches-fixup/* should be applied
 ```
+### Documents
+```
+docs/Unicore64A.pdf
+```
+### Copyright
+#### Authors
+```
+胡越予	1400012817
+高煜	1400012705
+章嘉晨	1300012792
+```
