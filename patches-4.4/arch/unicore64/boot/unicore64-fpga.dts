@@ -1,0 +1,17 @@
+/dts-v1/;
+/ {
+	model = "unicore64";
+	#address-cells = <1>;
+	#size-cells = <1>;
+
+	/*
+	 * Memory node.
+	 * The device type is memory.
+	 * The base of memory is 0, and the end is 0x04000000.
+	 * So the size of memory is 64M.
+	 */
+	memory {
+		device_type = "memory";
+		reg = <0 0x20000000>;
+	};
+};

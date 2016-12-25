@@ -1,0 +1,26 @@
+From e894cd6a0d375c9cf581893d768c17bbf6a69ee8 Mon Sep 17 00:00:00 2001
+From: Yueyu Hu <huyy@pku.edu.cn>
+Date: Tue, 29 Nov 2016 16:41:17 +0800
+Subject: [PATCH] Fix perl error
+
+Signed-off-by: Yueyu Hu <huyy@pku.edu.cn>
+---
+ kernel/timeconst.pl | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/kernel/timeconst.pl b/kernel/timeconst.pl
+index eb51d76..0461239 100644
+--- a/kernel/timeconst.pl
++++ b/kernel/timeconst.pl
+@@ -370,7 +370,7 @@ if ($hz eq '--can') {
+ 	}
+ 
+ 	@val = @{$canned_values{$hz}};
+-	if (!defined(@val)) {
++	if (!@val) {
+ 		@val = compute_values($hz);
+ 	}
+ 	output($hz, @val);
+-- 
+2.7.4
+

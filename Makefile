@@ -18,10 +18,10 @@ QEMU_TRACELOG	:= $(DIR_WORKING)/trace.log
 QEMU_PATCHES	+= $(DIR_UNICORE64)/patches-qemu
 
 LINUX_GITREPO	:= /pub/git/linux.git
-LINUX_VERSION	:= v3.7-rc3
+LINUX_VERSION	:= v4.4
 LINUX_ARCH	:= unicore64
 LINUX_BUILDLOG	:= $(DIR_WORKING)/linux-build.log
-LINUX_307	+= $(DIR_UNICORE64)/patches-3.7
+LINUX_307	+= $(DIR_UNICORE64)/patches-4.4
 
 PATH		:= $(CROSS_UNICORE64)/bin:$(PATH)
 
@@ -109,6 +109,11 @@ linux-new:
 	@cd $(DIR_WORKING)/linux;				\
 		git checkout -b unicore64 $(LINUX_VERSION)
 	@cd $(DIR_WORKING)/linux;				\
+		mkdir arch/unicore64/;				\
+		mkdir arch/unicore64/include/;		\
+		mkdir arch/unicore64/include/asm/;	\
+		cp include/asm-generic/* arch/unicore64/include/asm/; \
+		cp arch/x86/include/asm/* arch/unicore64/include/asm/; \
 		cp -a $(LINUX_307)/arch/* arch ;		\
 		cp -a $(LINUX_307)/Documentation/DocBook/* Documentation/DocBook ;	\
 		git add . ;					\

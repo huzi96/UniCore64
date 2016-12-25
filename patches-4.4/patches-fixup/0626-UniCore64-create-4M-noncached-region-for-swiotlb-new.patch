@@ -1,0 +1,43 @@
+From c71555a767642fdb4c88506296f2750eeaf90447 Mon Sep 17 00:00:00 2001
+From: Guan Xuetao <gxt@mprc.pku.edu.cn>
+Date: Tue, 13 May 2014 23:56:01 +0800
+Subject: [PATCH 626/641] UniCore64: create 4M noncached region for swiotlb
+
+Signed-off-by: Guan Xuetao <gxt@mprc.pku.edu.cn>
+---
+ lib/swiotlb.c                              |   16 ++++++++++++++++
+ 5 files changed, 34 insertions(+)
+
+diff --git a/lib/swiotlb.c b/lib/swiotlb.c
+index f114bf6..7d2a45f 100644
+--- a/lib/swiotlb.c
++++ b/lib/swiotlb.c
+@@ -173,12 +173,16 @@
+ 	/*
+ 	 * Get the overflow emergency buffer
+ 	 */
++#ifdef CONFIG_UNICORE64
++	io_tlb_overflow_buffer = (void *)UC64_VM_DMAOVERFLOW_START;
++#else
+ 	v_overflow_buffer = memblock_virt_alloc_low_nopanic(
+ 						PAGE_ALIGN(io_tlb_overflow),
+ 						PAGE_SIZE);
+ 	if (!v_overflow_buffer)
+ 		return -ENOMEM;
+ 
+ 	io_tlb_overflow_buffer = __pa(v_overflow_buffer);
++#endif
+ 
+ 	/*
+@@ -225,5 +225,9 @@
+ 	/* Get IO TLB memory from the low pages */
++#ifdef CONFIG_UNICORE64
++	io_tlb_start = (char *)UC64_VM_DMA_START;
++#else
+ 	vstart = memblock_virt_alloc_low_nopanic(PAGE_ALIGN(bytes), PAGE_SIZE);
+ 	if (vstart && !swiotlb_init_with_tbl(vstart, io_tlb_nslabs, verbose))
+ 		return;
++#endif
+ 
+1.7.9.5
+

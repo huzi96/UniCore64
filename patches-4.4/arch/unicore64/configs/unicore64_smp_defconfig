@@ -1,0 +1,66 @@
+### General setup
+CONFIG_LOCALVERSION="-uc64"
+#	Initial RAM filesystem and RAM disk (initramfs/initrd) support
+CONFIG_BLK_DEV_INITRD=y
+CONFIG_INITRAMFS_SOURCE="~/UniCore64/initramfs/initramfs_config.busybox"
+
+### Processor and System Type
+CONFIG_SMP=y
+#	Processor Features
+CONFIG_ARCH_FPGA=y
+CONFIG_CPU_ICACHE_DISABLE=n
+CONFIG_CPU_DCACHE_DISABLE=n
+
+CONFIG_HZ_100=y
+
+# Device Drivers
+#	Hardware I/O ports
+CONFIG_SERIO_I8042=y
+#	Console display driver support
+CONFIG_FRAMEBUFFER_CONSOLE=y
+CONFIG_VGA_CONSOLE=n
+CONFIG_FONTS=y
+CONFIG_FONT_8x8=y
+CONFIG_FONT_8x16=y
+CONFIG_INPUT=y
+
+CONFIG_VT=y
+CONFIG_VT_CONSOLE=y
+
+#       Graphics support
+CONFIG_FB=y
+CONFIG_FB_SYS_FILLRECT=y
+CONFIG_FB_SYS_COPYAREA=y
+CONFIG_FB_SYS_IMAGEBLIT=y
+CONFIG_FB_SYS_FOPS=y
+CONFIG_FB_PUV4_DE2=y
+
+# SCSI device support
+CONFIG_SCSI=y
+CONFIG_SCSI_DMA=y
+#Disable SWIOTLB for 3.7!
+CONFIG_SWIOTLB=n
+
+CONFIG_BLK_DEV_SD=y
+
+# SCSI Transports
+CONFIG_ATA=y
+CONFIG_ATA_VERBOSE_ERROR=y
+CONFIG_ATA_SFF=y
+CONFIG_PATA_BK3710=y
+
+#
+# File systems
+#
+CONFIG_EXT2_FS=y
+CONFIG_FS_MBCACHE=y
+
+### Kernel hacking
+CONFIG_DEBUG_KERNEL=y
+CONFIG_DEBUG_OCD=y
+CONFIG_DEBUG_MCOUNT=n
+
+### Boot options
+CONFIG_CMDLINE="earlyprintk=ocd,keep ignore_loglevel root=/dev/ram0 rw video=unifb:640x480@60-16"
+
+### Kernel hacking
