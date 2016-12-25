@@ -2,3 +2,4 @@ results
 *.swp
 *.pyc
 working
+.DS_Store/*
