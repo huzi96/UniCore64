@@ -15,7 +15,8 @@ QEMU_GITREPO	:= /pub/git/qemu.git
 QEMU_BUILDLOG	:= $(DIR_WORKING)/qemu-build.log
 QEMU_TARGETS	:= unicore64-linux-user,unicore64-softmmu
 QEMU_TRACELOG	:= $(DIR_WORKING)/trace.log
-QEMU_PATCHES	+= $(DIR_UNICORE64)/patches-qemu
+QEMU_NEW_PATCHES	+= $(DIR_UNICORE64)/patches-new-qemu
+QEMU_PATCHES    += $(DIR_UNICORE64)/patches-qemu
 
 LINUX_GITREPO	:= /pub/git/linux.git
 LINUX_VERSION	:= v4.4
@@ -137,16 +138,28 @@ linux-make:
 	@$(OBJDUMP) -D $(DIR_WORKING)/linux/vmlinux		\
 		> $(DIR_WORKING)/vmlinux.disasm
 
-qemu-new:
+qemu-27-new:
 	@test -d $(DIR_WORKING)/qemu-unicore64 ||		\
 		mkdir -p $(DIR_WORKING)/qemu-unicore64
 	@echo "Remove old qemu repo ..."
 	@rm -fr $(DIR_WORKING)/qemu
 	@cd $(DIR_WORKING); git clone $(QEMU_GITREPO)
 	@cd $(DIR_WORKING)/qemu;				\
-		git br unicore64 0b8db8f ;			\
+		git br unicore64 1dc33ed;			\
 		git co unicore64 ;				\
-		git am $(QEMU_PATCHES)/*
+		git am $(QEMU_NEW_PATCHES)/*
+
+qemu-new:
+	@test -d $(DIR_WORKING)/qemu-unicore64 ||               \
+        mkdir -p $(DIR_WORKING)/qemu-unicore64
+	@echo "Remove old qemu repo ..."
+	@rm -fr $(DIR_WORKING)/qemu
+	@cd $(DIR_WORKING); git clone $(QEMU_GITREPO)
+	@cd $(DIR_WORKING)/qemu;                                \
+   		git br unicore64 0b8db8f;                       \
+        git co unicore64 ;                              \
+        git am $(QEMU_PATCHES)/*
+
 
 qemu-make:
 	@echo "Configure qemu ..."
